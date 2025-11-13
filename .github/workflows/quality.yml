@@ -31,8 +31,10 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        export PYTHONPATH=$GITHUB_WORKSPACE/src
-        pytest --cov=src tests
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        python -m pytest --cov=src tests
+
 
     - name: Bandit security scan
       run: bandit -r src -f html -o bandit_report.html
