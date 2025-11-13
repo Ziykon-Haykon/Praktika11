@@ -27,7 +27,8 @@ jobs:
       run: ruff check src tests
 
     - name: Mypy type check
-      run: mypy src tests
+      run: mypy --explicit-package-bases src tests
+
 
     - name: Run tests with coverage
       run: pytest --cov=src tests
