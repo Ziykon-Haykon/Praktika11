@@ -27,19 +27,13 @@ jobs:
       run: ruff check src tests
 
     - name: Mypy type check
-      run: |
-        export PYTHONPATH=$(pwd)/src
-        mypy src tests
+      run: mypy src tests
 
     - name: Run tests with coverage
-      run: |
-        export PYTHONPATH=$(pwd)/src
-        pytest --cov=src tests
-
+      run: pytest --cov=src tests
 
     - name: Bandit security scan
       run: bandit -r src -f html -o bandit_report.html
 
     - name: Safety check
       run: safety check
-
