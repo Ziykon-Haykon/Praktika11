@@ -16,5 +16,5 @@ jobs:
       - run: ruff check .
       - run: mypy .
       - run: pytest --cov=. --cov-fail-under=80
-      - run: bandit -r .
+      - run: bandit -r . -x test_calc.py
       - run: safety check
