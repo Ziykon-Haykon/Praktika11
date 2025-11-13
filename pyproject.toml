@@ -1,6 +1,14 @@
+[tool.ruff]
+# lint options
+line-length = 88
+select = ["E", "F", "B", "C"]
+
 [tool.ruff.lint]
-select = ["E", "F"]
+select = ["E", "F", "B", "C"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = 3.11
 warn_unused_configs = true
+disallow_untyped_defs = true
+check_untyped_defs = true
+ignore_missing_imports = true

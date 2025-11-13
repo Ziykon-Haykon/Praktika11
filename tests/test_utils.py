@@ -1,8 +1,7 @@
 from src.utils import unsafe_eval, greet
 
-def test_greet():
-    assert greet("Alice") == "Hello, Alice"
+def test_greet() -> None:
+    assert greet("Alice") == "Hello, Alice"  # убрал !
 
-def test_unsafe_eval():
-    # намеренно простой безопасный пример
-    assert unsafe_eval("2 + 3") == 5
+def test_unsafe_eval() -> None:
+    assert unsafe_eval("1 + 2") == 3
