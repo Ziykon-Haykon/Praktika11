@@ -29,9 +29,10 @@ jobs:
     - name: Mypy type check
       run: mypy --explicit-package-bases src tests
 
-
     - name: Run tests with coverage
-      run: pytest --cov=src tests
+      run: |
+        export PYTHONPATH=$GITHUB_WORKSPACE/src
+        pytest --cov=src tests
 
     - name: Bandit security scan
       run: bandit -r src -f html -o bandit_report.html
