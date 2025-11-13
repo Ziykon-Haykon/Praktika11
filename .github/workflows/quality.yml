@@ -24,7 +24,8 @@ jobs:
         pip install -r requirements.txt
 
     - name: Ruff check
-      run: ruff src tests --format=json
+      run: ruff . --format json
+
 
     - name: Mypy type check
       run: mypy src tests
