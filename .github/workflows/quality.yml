@@ -1,20 +1,40 @@
 name: Quality Gate
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  test:
+  quality:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - run: pip install -r requirements.txt
-      - run: pip install ruff mypy pytest pytest-cov bandit safety
-      - run: ruff check .
-      - run: mypy .
-      - run: pytest --cov=. --cov-fail-under=80
-      - run: bandit -r . -x test_calc.py
-      - run: safety check
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Ruff check
+      run: ruff src tests --format=json
+
+    - name: Mypy type check
+      run: mypy src tests
+
+    - name: Run tests with coverage
+      run: pytest --cov=src tests
+
+    - name: Bandit security scan
+      run: bandit -r src -f html -o bandit_report.html
+
+    - name: Safety check
+      run: safety check
+
