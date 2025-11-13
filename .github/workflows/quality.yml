@@ -23,9 +23,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Ruff check
-      run: ruff check src tests -- --format json
-
+    - name: Lint with ruff
+      run: ruff check src tests
 
     - name: Mypy type check
       run: mypy src tests
