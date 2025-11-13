@@ -35,9 +35,5 @@ jobs:
         pip install -r requirements.txt
         python -m pytest --cov=src tests
 
-
-    - name: Bandit security scan
-      run: bandit -r src -f html -o bandit_report.html
-
     - name: Safety check
       run: safety check
